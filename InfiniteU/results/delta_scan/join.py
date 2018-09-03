@@ -56,12 +56,15 @@ def main():
 	out = sys.argv[3]
 	 
 
+	print("="*80)
+	print("Join")
+	print("="*80)
+	print("Reading files in progress")
 	with open(in_a, 'rb') as g:
 		a = pickle.load(g)
 
 	with open(in_b, 'rb') as g:
 		b = pickle.load(g)
-	print("="*80)
 	print("Files: {a} and {b} are open.".format(a=in_a,b=in_b))
 
 	c = sorted(a+b, key = delta)

@@ -180,9 +180,9 @@ def main():
 	print("Now overlaps will be computed. It takes a lot of time (5 min)")
 	fidelities = fidelity(stts, dts, fs_reach)
 
-	print("OK, done. Now that data will be saved to "+fidelity_out)
+	print("OK, done. Now overlaps will be saved to "+fidelity_out)
 	with open(fidelity_out, 'wb') as g:
-		pickle.dump(fidelity_out, g)
+		pickle.dump(fidelities, g)
 
 	"""
 	sys.exit(0)

@@ -17,4 +17,6 @@ TODO:
 			if the last dy/dx is more than 0.3 * (dy/dx [0]) away from linear fit then
 		it's not linear. And for the fidelity suscpetibility use the value of y[0].
 
+- 0.3 is just an arbitrary value. It would be good to find something better.
+
 

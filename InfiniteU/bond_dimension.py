@@ -14,11 +14,11 @@ import numpy as np
 
 
 def main():
-	L=30
-	delta=0.904
+	L=60
+	delta=0.9064
 
 	file_name="L"+str(L) + \
-			"_D"+str(int(delta*1000))+\
+			"_D"+str(int(delta*10000))+\
 			"_CHIall.pkl"
 
 	verbose_model = 0
@@ -27,7 +27,6 @@ def main():
 	t=1.0
 	alpha=0.5
 	beta=0.02
-
 
 	cnsrv_bsn = 'Sz'
 	cnsrv_spn = None

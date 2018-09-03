@@ -12,7 +12,7 @@ import pickle
 
 
 def main():
-	L=54
+	L=46
 	chi = 50
 
 	file_name="L"+str(L)+"_D09E_CHI"+str(chi)+".pkl"
