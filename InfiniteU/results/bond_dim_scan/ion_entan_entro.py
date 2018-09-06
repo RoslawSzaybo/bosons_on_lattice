@@ -68,7 +68,7 @@ def main():
 		plt.plot(ee_x_axis, first_half_ee, linestyle='-', marker='.')
 		plt.xlabel('$\log(\\frac{\pi}{L}\sin(\pi \mathrm{l}/L))$')
 		plt.ylabel('$S_\mathrm{l}$')
-		plt.ylim(0.0,1.0)
+		plt.ylim(0.0,1.5)
 		plt.grid()
 		plt.title('Entanglement entropy $S_\mathrm{l}$\n'+
 				'@ $\Delta = {d:.4f}$, max bond dim = {a}'.format(d=delta,a=max_bond_dim))

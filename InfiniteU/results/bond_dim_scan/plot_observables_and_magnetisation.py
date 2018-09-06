@@ -52,6 +52,7 @@ for psi in delta_scan:
 	max_bond_dim = psi[1]
 	bnd_dim += [max_bond_dim]
 
+	plt.ion()
 	plt.subplot(2, 1, 1)
 	plt.title('Ground expectation values\nmax bond dim = {a:d}'.format(a=max_bond_dim))
 	plt.plot(boson_site_number, n, 'k*')
@@ -68,10 +69,12 @@ for psi in delta_scan:
 	plt.text(0, -1.25, 'order parameter = {a:.4f}'.format(a = magnetisation_every_second))
 	plt.grid()
 
-	plt.show()
+	plt.draw()
+	plt.pause(0.10)
 	plt.clf()
     
 
+plt.ioff()
 plt.plot(bnd_dim, ord_params, 'k*')
 plt.xlabel('$\langle n\\rangle$')
 plt.ylabel('Staggered magnetisation')

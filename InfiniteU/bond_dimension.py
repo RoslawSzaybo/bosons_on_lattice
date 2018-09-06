@@ -14,11 +14,12 @@ import numpy as np
 
 
 def main():
-	L=60
+	L=80
 	delta=0.9064
 
 	file_name="L"+str(L) + \
 			"_D"+str(int(delta*10000))+\
+			"E0" + \
 			"_CHIall.pkl"
 
 	verbose_model = 0
@@ -43,7 +44,9 @@ def main():
 	chi_start = np.arange(10)+5
 	chi_end = np.arange(35)*2+15
 
-	chis = np.concatenate((chi_start, chi_end))
+	#chis = np.concatenate((chi_start, chi_end))
+	# extra chi for 80
+	chis = np.arange(10)*2+85
 	for chi in chis:
 		psi = MPS.from_product_state(M.lat.mps_sites(), initial_state, bc='finite')
 		dmrg_params = {'mixer': None, 'verbose': verbose_dmrg, \
