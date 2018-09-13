@@ -21,7 +21,7 @@ class FermionOnSpinLattice(CouplingModel, MPOModel, NearestNeighborModel):
 
     For reference on this model see arXiv:1802.05689v1
     
-    I one takes formally U = +\infty so that effectively bosons become fermions. 
+    One takes formally U = +\infty so that effectively bosons become fermions. 
     To simulate this fermions I use SpinHalfSite where spin up means that 
     there is a boson on-site and spin down means that there is no boson on-site.
     .. math ::
