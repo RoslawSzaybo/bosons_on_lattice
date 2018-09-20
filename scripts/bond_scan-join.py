@@ -13,6 +13,8 @@ import sys
 def chi(pkl):
 	return pkl[1]
 
+def chi_new(pkl):
+	return pkl[2]['trunc_params']['chi_max']
 
 def main():
 	if len(sys.argv) != 4:
@@ -31,13 +33,18 @@ def main():
 	with open(in_b, 'rb') as g:
 		b = pickle.load(g)
 
-	if not a[0] == b[0]:
+	old = len(a[0]) > 3
+
+	if old and not a[0] == b[0]:
 		print("CAREFUL!")
 		print( " a[0] is different from b[0]")
 
-	c = a[:2]
-	
-	c += sorted(a[2:]+b[2:], key = chi)
+
+	if old:
+		c = sorted(a[2:]+b[2:], key = chi)
+	else:
+		c = sorted(a+b, key = chi_new)
+
 
 	with open(out, 'wb') as g:
 		pickle.dump(c,g)

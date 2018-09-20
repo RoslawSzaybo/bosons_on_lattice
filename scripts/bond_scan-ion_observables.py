@@ -31,23 +31,27 @@ def main():
 	with open(file_name, 'rb') as g:
 		delta_scan = pickle.load(g)
 
-
-	occupation = 1.0-np.arange(61)/60.0
 	ord_params = []
 	entglmt_entr = []
 	bnd_dim = []
 
-
-	L = delta_scan[0]['L']
-	beta = delta_scan[0]['beta']
-	delta = delta_scan[0]['delta']
+	old = len(delta_scan[0]) > 3
+	if old:
+		L = delta_scan[0]['L']
+		beta = delta_scan[0]['beta']
+		delta = delta_scan[0]['delta']
+	else:
+		L = delta_scan[0][0].L
+		beta = delta_scan[0][1]['beta']
+		delta = delta_scan[0][1]['delta']
 
 	boson_site_number = np.arange(L)
 	bond_site_number = np.arange(L-1)+0.5
 	l = np.arange(L//2)
 	ee_x_axis = np.log((np.pi/L)*np.sin(np.pi*l/L))
 
-	delta_scan = delta_scan[2:]
+	if old:
+		delta_scan = delta_scan[2:]
 
 	for psi in delta_scan:
 		state = psi[0]
@@ -55,7 +59,11 @@ def main():
 		staggered_magnetisation = order_parameter(state)
 		ord_params += [staggered_magnetisation]
 
-		max_bond_dim = psi[1]
+		max_bond_dim = 0
+		if old:
+			max_bond_dim = psi[1]
+		else:
+			max_bond_dim = psi[2]['trunc_params']['chi_max']
 		bnd_dim += [max_bond_dim]
 
 		ee = state.entanglement_entropy(n = 1)
@@ -108,7 +116,7 @@ def main():
 	plt.xlabel('D - max bond dimension')
 	plt.ylabel('Entanglement entropy\nat middle of the chain - $S_\mathrm{L/2}$')
 	plt.grid()
-	plt.title('Entanglement entropy at middle of the chain\n'+
+	plt.title('Entanglement entropy at the middle of the chain\n'+
 			"$\Delta = {d:.4f}$".format(d=delta) +\
 			", L = {l}".format(l=L)+\
 			", U = $\infty$"+\

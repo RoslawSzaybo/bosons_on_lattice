@@ -35,16 +35,27 @@ def main():
 	entglmt_entr = []
 	bnd_dim = []
 
-	L = delta_scan[0]['L']
-	beta = delta_scan[0]['beta']
-	delta = delta_scan[0]['delta']
+	old = len(delta_scan[0]) > 3 
+	if old:
+		L = delta_scan[0]['L']
+		beta = delta_scan[0]['beta']
+		delta = delta_scan[0]['delta']
+	else:
+		L = delta_scan[0][0].L
+		beta = delta_scan[0][1]['beta']
+		delta = delta_scan[0][1]['delta']
 
-	delta_scan = delta_scan[2:]
+	if old:
+		delta_scan = delta_scan[2:]
 
 	for psi in delta_scan:
 		state = psi[0]
 
-		max_bond_dim = psi[1]
+		max_bond_dim = 0
+		if old:
+			max_bond_dim = psi[1]
+		else:
+			max_bond_dim = psi[2]['trunc_params']['chi_max']
 		bnd_dim += [max_bond_dim]
 
 		ee = state.entanglement_entropy(n = 1)
