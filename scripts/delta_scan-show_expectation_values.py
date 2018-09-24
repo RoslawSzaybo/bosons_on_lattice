@@ -47,6 +47,34 @@ def show_fermionic_expectation_values(state, delta, beta, L):
 	plt.pause(0.01)
 	plt.clf()
 
+def show_bosonic_expectation_values(state, U, delta, beta, L):
+	plt.ion()
+
+	boson_site_number = np.arange(L)
+	n = state.expectation_value('N0')
+	plt.subplot(2, 1, 1)
+	plt.title("Ground state expectation values\n"+\
+			"$U={:.1f}$, ".format(U) +\
+			"$\Delta$ = {a:.6f}, ".format(a=delta)+\
+			"$\\beta$ = {b:.3f}".format(b=beta))
+	plt.plot(boson_site_number, n, 'k*')
+	plt.ylabel('$\langle n\\rangle$')
+	plt.ylim(-0.15,1.15)
+	plt.grid()
+
+	bond_site_number = np.arange(L-1) + 0.5
+	sigmaz = state.expectation_value('Sigmaz1')[:-1]
+	plt.subplot(2, 1, 2)
+	plt.plot(bond_site_number, sigmaz, 'r.')
+	plt.xlabel('site number')
+	plt.ylabel('$\langle\sigma^z\\rangle$')
+	plt.ylim(-1.15,1.15)
+	plt.grid()
+
+	plt.draw()
+	plt.pause(0.01)
+	plt.clf()
+
 def show_order_parameter(deltas, ord_params, beta, L):
 	plt.ioff()
 	plt.plot(deltas, ord_params, 'k*')
@@ -56,13 +84,13 @@ def show_order_parameter(deltas, ord_params, beta, L):
 	#plt.xlim(0.35,0.38)
 	plt.grid()
 	plt.title("Order parameter vs $\Delta$\n"+\
-			  "L={a:d}".format(a=L) +\
-			  " sites with half filling,"+\
-			  " $\\beta = {b:.3f}$".format(b=beta))
+			  "L={a:d} ".format(a=L) +\
+			  "sites with half filling, "+\
+			  "$\\beta = {b:.3f}$".format(b=beta))
 	plt.show()
 	plt.clf()
 
-def find_magnetisation(delta_scan, quick):
+def find_magnetisation(delta_scan, quick, finite_U):
 	L = delta_scan[0][1]['L']
 	beta = delta_scan[0][1]['beta']
 
@@ -76,7 +104,11 @@ def find_magnetisation(delta_scan, quick):
 		magnetisation_every_second = order_parameter(state)
 		ord_params += [magnetisation_every_second]
 		if not quick:
-			show_fermionic_expectation_values(state, delta, beta, L)
+			if finite_U:
+				U = psi[1]['U']
+				show_bosonic_expectation_values(state, U, delta, beta, L)
+			else:
+				show_fermionic_expectation_values(state, delta, beta, L)
  
 	show_order_parameter(deltas, ord_params, beta, L)
 	return 0
@@ -94,8 +126,10 @@ def main():
 	with open(file_name, 'rb') as g:
 		delta_scan = pickle.load(g)
 
+	finite_U = ('U' in delta_scan[0][1])
+
 	quick = len(sys.argv) > 2
-	find_magnetisation(delta_scan, quick)
+	find_magnetisation(delta_scan, quick, finite_U)
 	return 0
 	
 

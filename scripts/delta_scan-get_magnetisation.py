@@ -33,13 +33,26 @@ def main():
 	with open(file_name, 'rb') as g:
 		delta_scan = pickle.load(g)
 
+	# get some system parameters
+	finite_U = ('U' in delta_scan[0][1])
+	beta = delta_scan[0][1]['beta']
+	if finite_U:
+		U = "{:.2f}".format(delta_scan[0][1]['U'])
+	else:
+		U = "infty"
+
+
+	# if the second argument is given then 
+	# output is printed to the file
 	if len_sys_argv == 3:
-		output_filename = sys.argv[2]
-		out = open(output_filename, 'a+')
+		out_filename = "U"+ U + \
+			"_B{:.2f}_".format(beta) + str(sys.argv[2])
+		out = open(out_filename, 'w')
 
 	for psi in delta_scan:
 		state = psi[0]
 		delta = psi[1]['delta']
+
 		staggered_magnetisation = order_parameter(state)
 
 		data = "{d:.9f}\t{m:.9f}".format(d=delta,m=staggered_magnetisation)
