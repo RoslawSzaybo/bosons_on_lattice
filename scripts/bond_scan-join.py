@@ -26,7 +26,6 @@ def main():
 	in_b = sys.argv[2]
 	out = sys.argv[3]
 
-
 	with open(in_a, 'rb') as g:
 		a = pickle.load(g)
 

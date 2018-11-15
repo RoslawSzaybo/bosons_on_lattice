@@ -27,7 +27,6 @@ def main():
 
 	file_name = sys.argv[1]
 
-
 	with open(file_name, 'rb') as g:
 		delta_scan = pickle.load(g)
 

@@ -10,11 +10,42 @@ import pickle
 import sys
 import matplotlib.pyplot as plt
 
+def plot_entropy_of_entanglement(ee_x_axis, first_half_ee,
+                                 delta, max_bond_dim, beta):
+    plt.ion()
+    plt.plot(ee_x_axis, first_half_ee, linestyle='-', marker='.')
+    plt.xlabel('$\log(\\frac{\pi}{L}\sin(\pi \mathrm{l}/L))$')
+    plt.ylabel('$S_\mathrm{l}$')
+    plt.grid()
+    plt.title("Entanglement entropy $S_\mathrm{l}$\n"+\
+				"$\Delta = {d:.4f}$".format(d=delta) +\
+				", max bond dim = {a}".format(a=max_bond_dim)+\
+				", $\\beta = {b:.2f}$".format(b=beta))
+    plt.draw()
+    plt.pause(0.25)
+    plt.clf()
+
+def plot_entang_entro_at_middle(bnd_dim, entglmt_entr, delta, L, U, beta):
+	plt.ioff()
+
+	plt.plot(bnd_dim, entglmt_entr, 'k*')
+	plt.xlabel('D - max bond dimension')
+	plt.ylabel('Entanglement entropy\nat middle of the chain - $S_\mathrm{L/2}$')
+	plt.grid()
+	plt.title('Entanglement entropy at middle of the chain\n'+
+			"$\Delta = {d:.4f}$".format(d=delta) +\
+			", L = {l}".format(l=L)+\
+			", U = " + U +\
+			", $\\beta = {b:.2f}$".format(b=beta))
+	plt.show()
+	plt.clf()    
 
 def main():
-	if len(sys.argv) != 2:
+	if len(sys.argv) < 2:
 		print("I need name of a file as a command line argument!")
 		sys.exit()
+    
+	quick  = len(sys.argv) > 2
 
 	file_name = sys.argv[1]
 
@@ -49,8 +80,6 @@ def main():
 		beta = delta_scan[0][1]['beta']
 		delta = delta_scan[0][1]['delta']
 
-	boson_site_number = np.arange(L)
-	bond_site_number = np.arange(L-1)+0.5
 	l = np.arange(L//2)
 	ee_x_axis = np.log((np.pi/L)*np.sin(np.pi*l/L))
 
@@ -72,34 +101,12 @@ def main():
 		# I want to be on the top sequence
 		entglmt_entr += [max(ee[L//2],ee[L//2-1])]
 
-		plt.ion()
-		plt.plot(ee_x_axis, first_half_ee, linestyle='-', marker='.')
-		plt.xlabel('$\log(\\frac{\pi}{L}\sin(\pi \mathrm{l}/L))$')
-		plt.ylabel('$S_\mathrm{l}$')
-		plt.ylim(0.0,1.5)
-		plt.grid()
-		plt.title("Entanglement entropy $S_\mathrm{l}$\n"+\
-				"$\Delta = {d:.4f}$".format(d=delta) +\
-				", max bond dim = {a}".format(a=max_bond_dim)+\
-				", $\\beta = {b:.2f}$".format(b=beta))
-		plt.draw()
-		plt.pause(0.25)
-		plt.clf()
+		if not quick:
+         		plot_entropy_of_entanglement(ee_x_axis, first_half_ee, delta, 
+                               max_bond_dim, beta)
 
+	plot_entang_entro_at_middle(bnd_dim, entglmt_entr, delta, L, U, beta)
 
-	plt.ioff()
-
-	plt.plot(bnd_dim, entglmt_entr, 'k*')
-	plt.xlabel('D - max bond dimension')
-	plt.ylabel('Entanglement entropy\nat middle of the chain - $S_\mathrm{L/2}$')
-	plt.grid()
-	plt.title('Entanglement entropy at middle of the chain\n'+
-			"$\Delta = {d:.4f}$".format(d=delta) +\
-			", L = {l}".format(l=L)+\
-			", U = " + U +\
-			", $\\beta = {b:.2f}$".format(b=beta))
-	plt.show()
-	plt.clf()
 
 if __name__ == '__main__':
 	main()

@@ -47,6 +47,7 @@ def show_fermionic_expectation_values(state, delta, beta, L):
 	plt.pause(0.01)
 	plt.clf()
 
+
 def show_bosonic_expectation_values(state, U, delta, beta, L):
 	plt.ion()
 
@@ -54,7 +55,7 @@ def show_bosonic_expectation_values(state, U, delta, beta, L):
 	n = state.expectation_value('N0')
 	plt.subplot(2, 1, 1)
 	plt.title("Ground state expectation values\n"+\
-			"$U={:.1f}$, ".format(U) +\
+			"$U = $" + U + ", " +\
 			"$\Delta$ = {a:.6f}, ".format(a=delta)+\
 			"$\\beta$ = {b:.3f}".format(b=beta))
 	plt.plot(boson_site_number, n, 'k*')
@@ -75,20 +76,23 @@ def show_bosonic_expectation_values(state, U, delta, beta, L):
 	plt.pause(0.01)
 	plt.clf()
 
-def show_order_parameter(deltas, ord_params, beta, L):
+
+def show_order_parameter(deltas, ord_params, beta, L, U):
 	plt.ioff()
 	plt.plot(deltas, ord_params, 'k*')
 	plt.xlabel('$\Delta$')
 	plt.ylabel('Staggered magnetisation')
-	plt.ylim(-0.15,1.15)
+	plt.ylim(-1.15,1.15)
 	#plt.xlim(0.35,0.38)
 	plt.grid()
 	plt.title("Order parameter vs $\Delta$\n"+\
-			  "L={a:d} ".format(a=L) +\
-			  "sites with half filling, "+\
-			  "$\\beta = {b:.3f}$".format(b=beta))
+			  "L={a:d}, ".format(a=L) +\
+			  "$\\rho = 0.5$, "+\
+			  "$\\beta = {b:.3f}$, ".format(b=beta) +\
+                "$U = $" + U)
 	plt.show()
 	plt.clf()
+
 
 def find_magnetisation(delta_scan, quick, finite_U):
 	L = delta_scan[0][1]['L']
@@ -103,14 +107,17 @@ def find_magnetisation(delta_scan, quick, finite_U):
 		deltas += [delta]
 		magnetisation_every_second = order_parameter(state)
 		ord_params += [magnetisation_every_second]
-		if not quick:
-			if finite_U:
-				U = psi[1]['U']
+		if finite_U:
+			U = psi[1]['U']
+			U = "{:.4f}".format(U)
+			if not quick:
 				show_bosonic_expectation_values(state, U, delta, beta, L)
-			else:
-				show_fermionic_expectation_values(state, delta, beta, L)
+		else:
+         		U = "$\infty$"
+         		if not quick:
+         			show_fermionic_expectation_values(state, U, delta, beta, L)
  
-	show_order_parameter(deltas, ord_params, beta, L)
+	show_order_parameter(deltas, ord_params, beta, L, U)
 	return 0
 
 
