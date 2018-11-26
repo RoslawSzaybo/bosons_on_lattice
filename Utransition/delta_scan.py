@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#/usr/bin/env python3
 
 """
 Created on Thu Jul 12 17:48:42 2018
@@ -11,9 +11,9 @@ import time
 import pickle
 
 def main():
-	L = 40
-	chi = 60
-	U = 1.0
+	L = 60
+	chi = 80
+	U = 10.0
 	beta = 0.02
 
 	file_name = "U" + str(int(U)) +\

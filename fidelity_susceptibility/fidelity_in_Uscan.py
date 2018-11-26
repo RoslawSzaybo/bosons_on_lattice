@@ -10,23 +10,21 @@ later computations of fidelity susceptibility.
 
 import sys
 import pickle
-import numpy as np
-import matplotlib.pyplot as plt
 
 def get_states(filename):
 	with open(filename, 'rb') as g:
 		data = pickle.load(g)
 
 	states = []
-	deltas = []
+	Us = []
 
 	for sample in data:
 		states += [sample[0]]
-		deltas += [sample[1]['delta']]
-	return (states,deltas)
+		Us += [sample[1]['U']]
+	return (states, Us)
 
 
-def fidelity(states, deltas, reach):
+def fidelity(states, us, reach):
 	"""
 	This is the time consuming step.
 
@@ -37,27 +35,27 @@ def fidelity(states, deltas, reach):
 
 	fidelities = []
 	data_len = len(states)
-	if data_len != len(deltas):
+	if data_len != len(us):
 		print("in fidelity:")
-		print("len(states) != len(deltas)")
+		print("len(states) != len(us)")
 		sys.exit(-1)
 		
 
 	for i in range(data_len-1):
 		psi = states[i]
-		delta = deltas[i]
+		U = us[i]
 
 		loc_fi = []
-		loc_ddelta = []
+		loc_dU = []
 		range_forward = min(reach, (data_len-1)-i)
 		for j in range(range_forward):
 			fi = psi.overlap(states[i+j+1])
 			#fi = psi.overlap(states[i+j+1])[0] this one was producing erros
 			fi = abs(fi)
 			loc_fi += [fi]
-			loc_ddelta += [deltas[i+j+1] - delta]
+			loc_dU += [us[i+j+1] - U]
 
-		fidelities += [[loc_fi,loc_ddelta, delta]]
+		fidelities += [[loc_fi,loc_dU, U]]
 	return fidelities
 
 
@@ -68,11 +66,11 @@ def main():
 		print("python "+sys.argv[0]+" dmrg_results.pkl fiedlities_filename.pkl")
 		sys.exit(-1)
 
-	stts, dts = get_states(sys.argv[1])
+	stts, us = get_states(sys.argv[1])
 
 	fidelity_filename = sys.argv[2]
 	print("Now overlaps will be computed. It takes a lot of time (5 min)")
-	fidelities = fidelity(stts, dts, fs_reach)
+	fidelities = fidelity(stts, us, fs_reach)
 
 	print("OK, done. Now overlaps will be saved to "+fidelity_filename)
 	with open(fidelity_filename, 'wb') as g:

@@ -46,15 +46,19 @@ def clean_repetitions(c):
 
 
 def main():
-	if len(sys.argv) != 5:
-		print("I need name of a file as a command line argument! like this:")
-		print("$ python join.py A.pkl B.pkl C.pkl output.pkl")
-		sys.exit()
+	if len(sys.argv) != 6:
+            print("it joins four!!!")
+            print("it joins four!!!")
+            print("it joins four!!!")
+            print("I need name of a file as a command line argument! like this:")
+            print("$ python join.py A.pkl B.pkl C.pkl D.pkl E.pkl output.pkl")
+            sys.exit()
 
 	in_a = sys.argv[1]
 	in_b = sys.argv[2]
 	in_c = sys.argv[3]
-	out = sys.argv[4]
+	in_d = sys.argv[4]
+	out = sys.argv[5]
 	 
 
 	print("="*80)
@@ -69,9 +73,13 @@ def main():
 
 	with open(in_c, 'rb') as g:
 		x = pickle.load(g)
-	print("Files: {a} and {b} are open.".format(a=in_a,b=in_b))
 
-	c = sorted(a+b+x, key = delta)
+	with open(in_d, 'rb') as g:
+		y = pickle.load(g)
+
+	print("Files are open.")
+
+	c = sorted(a+b+x+y, key = delta)
 	print("Data in now united to a one, sorted file.")
 	d = clean_repetitions(c)
 	print("All repetitions are removed.")
