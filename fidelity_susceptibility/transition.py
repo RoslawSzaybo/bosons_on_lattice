@@ -157,8 +157,6 @@ def Delta_c(high=True):
     names += [[path + 'fs_U12.00_L50_ch80_dwn.tsv', 50]]
     names += [[path + 'fs_U12.00_L40_ch80_dwn.tsv', 40]]
     
-    
-    
     ## there is no cBOW here
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
@@ -185,10 +183,25 @@ def Delta_c(high=True):
     names = []
     names += [[path + 'fs_U7.00_L50_ch80.tsv', 50]]
     names += [[path + 'fs_U7.00_L40_ch80.tsv', 40]]
+    
+    # these were computed separately
+    # U=10
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/U10_B02_D9/'
+    names = []    
+    names += [[path + 'fs_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_L50_ch80.tsv', 50]]
+    names += [[path + 'fs_L40_ch80.tsv', 40]]
+    names += [[path + 'fs_L30_ch80.tsv', 30]]
+    
     #
     # series for smaller values of delta_c on the phase diagram
     # keep high = False
     # 
+    # 
+    ## U100
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U100_L60_ch80.tsv', 60]]   
     ## U20
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []    
@@ -224,12 +237,29 @@ def Delta_c(high=True):
     #
     # series for larger values of delta_c on the phase diagram 
     # keep high = True
+    # 
+    ## U10k
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U10000.00_L60_ch60.tsv', 60]]   
+    names += [[path + 'fs_U10000.00_L44_ch60.tsv', 44]]   
+    names += [[path + 'fs_U10000.00_L30_ch60.tsv', 30]]
+    ## U100
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U100_L60_ch80.tsv', 60]]   
+    names += [[path + 'fs_U100_L40_ch60.tsv', 40]]  
     ## U20
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []    
     names += [[path + 'fs_U20_L60_ch80.tsv', 60]]
     names += [[path + 'fs_U20_L50_ch80.tsv', 50]]
     names += [[path + 'fs_U20_L40_ch60.tsv', 40]]
+    ## 12
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U12_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_U12_L30_ch80.tsv', 30]]
     ## U9
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
@@ -252,32 +282,16 @@ def Delta_c(high=True):
     names += [[path + 'fs_U7.50_L60_ch80.tsv', 60]]
     names += [[path + 'fs_U7.50_L50_ch80.tsv', 50]]
     names += [[path + 'fs_U7.50_L40_ch80.tsv', 40]]
-    
-    
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/U10_B02_D9/'
-    names = []    
-    names += [[path + 'fs_L60_ch80.tsv', 60]]
-    names += [[path + 'fs_L50_ch80.tsv', 50]]
-    names += [[path + 'fs_L40_ch80.tsv', 40]]
-    names += [[path + 'fs_L30_ch80.tsv', 30]]
-    ## 12
+    ### U40
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
-    names += [[path + 'fs_U12_L60_ch80.tsv', 60]]
-    names += [[path + 'fs_U12_L30_ch80.tsv', 30]]
-    # 
-    ## U100
+    names += [[path + 'fs_U40_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_U40_L30_ch80.tsv', 30]]
+    ### U15
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
-    names += [[path + 'fs_U100_L60_ch80.tsv', 60]]   
-    names += [[path + 'fs_U100_L40_ch60.tsv', 40]]
-    # 
-    ## U10k
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
-    names = []
-    names += [[path + 'fs_U10000.00_L60_ch60.tsv', 60]]   
-    names += [[path + 'fs_U10000.00_L44_ch60.tsv', 44]]   
-    names += [[path + 'fs_U10000.00_L30_ch60.tsv', 30]]
+    names += [[path + 'fs_U40_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_U40_L30_ch80.tsv', 30]]
 
     Uname = names[0][0].split('_')[-3][1:]
     data = []
@@ -302,7 +316,7 @@ def Delta_c(high=True):
     return 0
     
 def main():
-    Delta_c(False)
+    Delta_c(high=True)
     
     return 
 
