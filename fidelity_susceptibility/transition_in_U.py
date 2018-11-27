@@ -93,21 +93,21 @@ def show_fs_together(data, Deltaname, show_peak=True):
 
 def U_c():
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
-    #Delta 
-    names = []
-    names += [[path+'fs_D0.850_L60_ch80.tsv',60]]
-    names += [[path+'fs_D0.850_L50_ch80.tsv',50]]
-    names += [[path+'fs_D0.850_L40_ch80.tsv',40]]
-    #Delta 
+    #Delta 0.800
     names = []
     names += [[path+'fs_D0.800_L60_ch80.tsv',60]]
     names += [[path+'fs_D0.800_L50_ch80.tsv',50]]
     names += [[path+'fs_D0.800_L40_ch80.tsv',40]]
-    #Delta 
+    #Delta 0.825
     names = []
     names += [[path+'fs_D0.825_L60_ch80.tsv',60]]
     names += [[path+'fs_D0.825_L50_ch80.tsv',50]]
     names += [[path+'fs_D0.825_L40_ch80.tsv',40]]
+    #Delta 0.850
+    names = []
+    names += [[path+'fs_D0.850_L60_ch80.tsv',60]]
+    names += [[path+'fs_D0.850_L50_ch80.tsv',50]]
+    names += [[path+'fs_D0.850_L40_ch80.tsv',40]]
 
     Deltaname = names[0][0].split('_')[-3][1:]
     data = []

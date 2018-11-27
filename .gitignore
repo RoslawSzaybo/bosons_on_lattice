@@ -1,0 +1,2 @@
+# ignore all large files with data
+*.pkl
