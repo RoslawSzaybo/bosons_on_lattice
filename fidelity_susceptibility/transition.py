@@ -303,6 +303,10 @@ def Delta_c(high=True):
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
     names += [[path + 'fs_U15_L60_ch80.tsv', 60]]
+    ## U40
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []    
+    names += [[path + 'fs_U40_L60_ch80.tsv', 60]]
 
     Uname = names[0][0].split('_')[-3][1:]
     data = []
@@ -312,9 +316,9 @@ def Delta_c(high=True):
         Ls += [ nL[1] ]        
         fidelity_sus = my_read_tsv(nL[0])
         if high:
-            narrow_D_fs = [x for x in fidelity_sus if x[0]>0.85 and x[0] < 0.95]
+            narrow_D_fs = [x for x in fidelity_sus if x[0]>0.85 and x[0] < 1.100]
         else:
-            narrow_D_fs = [x for x in fidelity_sus if x[0]<0.60 and x[0]>0.35]
+            narrow_D_fs = [x for x in fidelity_sus if x[0]<0.60 and x[0]>0.0]
             
         pair = max(narrow_D_fs, key = my_fs_key)
         Dcs += [pair[0]]
