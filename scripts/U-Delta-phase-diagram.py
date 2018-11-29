@@ -162,8 +162,8 @@ def phase_diagram(data):
     U_c_right = [10000.0, 100.0, 40.0, 20.0, 15.0, 12.00, 10.0, 9.0, 8.0, 7.75]
     Uinv_c_right = [inv(u) for u in U_c_right]
     # 
-    Delta_c_bottom = [0.85, 0.825, 0.8]
-    U_c_bottom = [7.4, 7.44, 7.6]
+    Delta_c_bottom = [0.863, 0.85, 0.825, 0.8]
+    U_c_bottom = [7.45, 7.4, 7.44, 7.6]
     Uinv_c_bottom = [inv(u) for u in U_c_bottom]
     #
     Delta_c = Delta_c_left + Delta_c_bottom[::-1] +  Delta_c_right[::-1]
@@ -200,6 +200,7 @@ def phase_diagram(data):
     0.800 0.05 7.6
     0.825 0.05 7.44
     0.850 0.1 7.4
+    0.863 0.15 7.45
     """    
     
     
@@ -207,10 +208,10 @@ def phase_diagram(data):
     # Plot critical points
     pointsize=3
     yerrs = [0.0]*10
-    yerrs += [0.05/(7.6*7.6), 0.05/(7.44*7.44), 0.1/(7.4*7.4)] # \Delta \frac{1}{x} = \frac{1}{x^2} \Delta x
+    yerrs += [0.05/(7.6*7.6), 0.05/(7.44*7.44), 0.1/(7.4*7.4), 0.15/(7.45*7.45)] # \Delta \frac{1}{x} = \frac{1}{x^2} \Delta x
     yerrs += [0]*10
     xerrs = [0.005, 0.01, 0.005, 0.01, 0.01, 0.01, 0.005, 0.005, 0.005, 0.005]
-    xerrs += [0]*3
+    xerrs += [0]*4
     xerrs += [0.005] + [0.01]*8 + [0.005]
     ax2.errorbar(x = Delta_c, 
                  y = U_c_inv,

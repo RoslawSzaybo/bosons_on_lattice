@@ -108,6 +108,11 @@ def U_c():
     names += [[path+'fs_D0.850_L60_ch80.tsv',60]]
     names += [[path+'fs_D0.850_L50_ch80.tsv',50]]
     names += [[path+'fs_D0.850_L40_ch80.tsv',40]]
+    #Delta 0.863
+    names = []
+    names += [[path+'fs_D0.863_L60_ch80.tsv',60]]
+    names += [[path+'fs_D0.863_L50_ch80.tsv',50]]
+    names += [[path+'fs_D0.863_L40_ch80.tsv',40]]
 
     Deltaname = names[0][0].split('_')[-3][1:]
     data = []
