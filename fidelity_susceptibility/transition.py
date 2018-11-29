@@ -151,11 +151,6 @@ def Delta_c(high=True):
     names = []
     names += [[path + 'fs_U7.60_L60L_ch70dwn.tsv', 60]]
 
-    ## 12 dwn
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
-    names = []
-    names += [[path + 'fs_U12.00_L50_ch80_dwn.tsv', 50]]
-    names += [[path + 'fs_U12.00_L40_ch80_dwn.tsv', 40]]
     
     ## there is no cBOW here
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
@@ -192,14 +187,6 @@ def Delta_c(high=True):
     
     
     
-    # these were computed separately
-    # U=10
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/U10_B02_D9/'
-    names = []    
-    names += [[path + 'fs_L60_ch80.tsv', 60]]
-    names += [[path + 'fs_L50_ch80.tsv', 50]]
-    names += [[path + 'fs_L40_ch80.tsv', 40]]
-    names += [[path + 'fs_L30_ch80.tsv', 30]]
     #
     # series for larger values of delta_c on the phase diagram 
     # keep high = True
@@ -257,10 +244,29 @@ def Delta_c(high=True):
     # keep high = False
     # 
     # 
+    ## U10k
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U10000.00_L60_ch60.tsv', 60]]   
+    names += [[path + 'fs_U10000.00_L44_ch60.tsv', 44]]   
+    names += [[path + 'fs_U10000.00_L30_ch60.tsv', 30]]   
+    ## U100
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U100_L60_ch80.tsv', 60]]   
+    ## U40
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []    
+    names += [[path + 'fs_U40_L60_ch80.tsv', 60]]
     ## U20
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []    
     names += [[path + 'fs_U20_L60_ch80.tsv', 60]]
+    ## 12 
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    names = []
+    names += [[path + 'fs_U12_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_U12_L30_ch80.tsv', 30]]
     ## 10 
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
@@ -272,7 +278,7 @@ def Delta_c(high=True):
     names += [[path + 'fs_U9.00_L60_ch80.tsv', 60]]
     names += [[path + 'fs_U9.00_L50_ch80.tsv', 50]]
     names += [[path + 'fs_U9.00_L40_ch60.tsv', 40]]
-    ## U8 -- from here its much more uncertain
+    ## U8 -- cBOW starts not to develop too well
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
     names += [[path + 'fs_U8.00_L60_ch80.tsv', 60]]
@@ -282,31 +288,25 @@ def Delta_c(high=True):
     names = []
     names += [[path + 'fs_U7.75_L60_ch80.tsv', 60]]
     names += [[path + 'fs_U7.75_L40_ch80.tsv', 40]]
-    ###
+    ### 7.5
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
     names += [[path + 'fs_U7.50_L60_ch80.tsv', 60]]
     names += [[path + 'fs_U7.50_L50_ch80.tsv', 50]]
-    ## U100
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
-    names = []
-    names += [[path + 'fs_U100_L60_ch80.tsv', 60]]   
-    ## U10k
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
-    names = []
-    names += [[path + 'fs_U10000.00_L60_ch60.tsv', 60]]   
-    names += [[path + 'fs_U10000.00_L44_ch60.tsv', 44]]   
-    names += [[path + 'fs_U10000.00_L30_ch60.tsv', 30]]   
     
     
     ### U15
     path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
     names = []
     names += [[path + 'fs_U15_L60_ch80.tsv', 60]]
-    ## U40
-    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/Utransition/'
+    # these were computed separately
+    # U=10
+    path = '/home/pwojcik/bosons_on_lattice/fidelity_susceptibility/U10_B02_D9/'
     names = []    
-    names += [[path + 'fs_U40_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_L60_ch80.tsv', 60]]
+    names += [[path + 'fs_L50_ch80.tsv', 50]]
+    names += [[path + 'fs_L40_ch80.tsv', 40]]
+    names += [[path + 'fs_L30_ch80.tsv', 30]]
 
     Uname = names[0][0].split('_')[-3][1:]
     data = []
@@ -318,7 +318,7 @@ def Delta_c(high=True):
         if high:
             narrow_D_fs = [x for x in fidelity_sus if x[0]>0.85 and x[0] < 1.100]
         else:
-            narrow_D_fs = [x for x in fidelity_sus if x[0]<0.60 and x[0]>0.0]
+            narrow_D_fs = [x for x in fidelity_sus if x[0]<0.65 and x[0]>0.55]
             
         pair = max(narrow_D_fs, key = my_fs_key)
         Dcs += [pair[0]]
@@ -331,7 +331,7 @@ def Delta_c(high=True):
     return 0
     
 def main():
-    Delta_c(high=False)
+    Delta_c(high=True)
     
     return 
 

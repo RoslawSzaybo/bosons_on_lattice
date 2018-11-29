@@ -168,13 +168,59 @@ def phase_diagram(data):
     #
     Delta_c = Delta_c_left + Delta_c_bottom[::-1] +  Delta_c_right[::-1]
     U_c_inv = Uinv_c_left + Uinv_c_bottom[::-1] + Uinv_c_right[::-1]
+
+    """
+    the uncertainties for critical delta on the left branch are
+    U \Delta \Delta_c
+    7.75 0.005
+    8.00 0.005
+    9.00 0.005
+    10.00 0.005
+    12.00 0.01
+    15.00 0.01
+    20.00 0.01
+    40.00 0.005
+    100.00 0.01
+    10000.00 0.005
+    the uncertainties for critical delta on the right branch are
+    U \Delta \Delta_c
+    7.75 0.005
+    8.00 0.01
+    9.00 0.01
+    10.00 0.01
+    12.00 0.01
+    15.00 0.01
+    20.00 0.01
+    40.00 0.01
+    100.00 0.01
+    10000.00 0.005
+    
+    and there are three points for the scans in U where there is only the U uncertainty
+    \Delta_c \Delta U U
+    0.800 0.05 7.6
+    0.825 0.05 7.44
+    0.850 0.1 7.4
+    """    
+    
     
     fig.colorbar(cntr2, ax=ax2, label="staggered magnetisation (for 60 sites)")
     # Plot critical points
-    pointsize=4
-    ax2.plot(Delta_c, U_c_inv, 'ko--', ms=pointsize)
+    pointsize=3
+    yerrs = [0.0]*10
+    yerrs += [0.05/(7.6*7.6), 0.05/(7.44*7.44), 0.1/(7.4*7.4)] # \Delta \frac{1}{x} = \frac{1}{x^2} \Delta x
+    yerrs += [0]*10
+    xerrs = [0.005, 0.01, 0.005, 0.01, 0.01, 0.01, 0.005, 0.005, 0.005, 0.005]
+    xerrs += [0]*3
+    xerrs += [0.005] + [0.01]*8 + [0.005]
+    ax2.errorbar(x = Delta_c, 
+                 y = U_c_inv,
+                 xerr = xerrs,
+                 yerr = yerrs,
+                 capsize = 3,
+                 capthick = 1.2,
+                 fmt = 'ko--', 
+                 ms = pointsize)
     
-
     #   
     # Here are the locations of the data points
     #ax2.plot(Delta, U, 'ko', ms=3)
